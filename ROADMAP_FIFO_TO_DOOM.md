@@ -1,35 +1,12 @@
 # From FIFOs to DOOM on the KR260: The Complete Digital Design Roadmap
 
-## Introduction & Welcome Back to Digital Design!
-As an embedded software engineer returning to digital design, you are in an enviable position. You already understand how software interacts with hardware: register maps, interrupt latency, memory hierarchies, bus protocols, and cache lines. 
-
-Your instincts are spot on: **FIFOs are the gateway drug to professional digital design.** Master FIFOs, and you naturally master:
+**FIFOs are the gateway drug to professional digital design.** Master FIFOs, and you naturally master:
 1. Pipelining, flow control, and backpressure (ready/valid handshakes).
 2. Clock Domain Crossing (CDC), metastability, MTBF, and Gray codes.
 3. Memory primitives (BRAM, UltraRAM, Distributed RAM) and address decoding.
 4. Comprehensive, self-checking verification and race-condition analysis.
 
-This updated roadmap is organized around a **Behavioral-First Re-learning Strategy**: rather than getting bogged down in low-level Xilinx silicon primitives, you build the concepts cleanly from scratch in portable HDL first, verify them, and then connect them to your hardware primitives, UART, and custom CPU.
-
----
-
-## Phase 0: What You Currently Have in This Repo (The Hardware Primitives)
-
-Here is a quick inventory of what is currently in `/home/kylie/repos/fifo_study`:
-
-```
-fifo_study/
-├── ramb18e2_fifo_standard.vhd   # Low-level Xilinx UltraScale+ BRAM primitive wrapper
-├── dual_port_ram_w32_d2048.vhd   # 4x BRAM cascaded array (2x width, 2x depth)
-├── bit2gray.vhd                 # Parameterized Binary-to-Gray converter
-├── fifo_w32_d2048.vhd           # Asynchronous Dual-Clock FIFO core (2048x32)
-└── axi4s_fifo_w32_d2048.vhd      # AXI4-Stream wrapper with First-Word Fall-Through (FWFT)
-```
-
-> [!NOTE]
-> The reason this code feels unfamiliar is that it skipped behavioral modeling and jumped directly into **AMD UltraScale+ `RAMB18E2` silicon primitives and hardwired cascade chains** (`CASDIN`/`CASDOUT`, `CASDOMUX`, UG573 18-bit modes). 
-> 
-> **Our Strategy:** Set these primitive files aside temporarily. We will rebuild the pure digital design concepts from scratch behaviorally. Once you finish Phase 1, you will return to these files and understand every single wire.
+This roadmap is organized around a **Behavioral-First Re-learning Strategy**: rather than getting bogged down in low-level Xilinx silicon primitives, you build the concepts cleanly from scratch in portable HDL first, verify them, and then connect them to hardware primitives, UART, and custom CPU.
 
 ---
 
